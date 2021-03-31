@@ -10,7 +10,7 @@ export class AuthenticationService {
   }
 
   authenticateUser(data) {
-    return this.httpClient.post("http://localhost:3000/auth/v1", data);
+    return this.httpClient.post("http://localhost:3000/auth/v1/", data);
 
   }
 
@@ -25,7 +25,7 @@ export class AuthenticationService {
   }
 
   isUserAuthenticated(token): Promise<any> {
-    return this.httpClient.post(" http://localhost:3000/auth/v1/isAuthenticated", {}, {
+    return this.httpClient.post("http://localhost:3000/auth/v1/isAuthenticated", {}, {
       headers: new HttpHeaders().set('Authorization', `Bearer ${token}`)
     }).pipe(map(res => res['isAuthenticated'])).toPromise();
   }
