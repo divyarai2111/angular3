@@ -1,4 +1,7 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
+import { RouterService } from '../services/router.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-header',
@@ -7,4 +10,25 @@ import { Component } from '@angular/core';
 })
 export class HeaderComponent {
   isNoteView = true;
+
+  
+  // switchView() {
+  //   if (this.isNoteView) {
+  //     this.routerService.routeToListView();
+  //     this.isNoteView = false;
+  //   } else {
+  //     this.routerService.routeToNoteView();
+  //     this.isNoteView = true;
+  //   }
+  // }
+
+  constructor(private router: Router, 
+    private routerService: RouterService
+    ,private location: Location) {
+    router.events.subscribe((val) => {
+      if (location.path().indexOf('listview') > -1) {
+        this.isNoteView = false;
+      }
+    });
+  }
 }
